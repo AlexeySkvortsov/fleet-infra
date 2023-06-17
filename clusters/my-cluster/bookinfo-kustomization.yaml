@@ -12,3 +12,18 @@ spec:
     kind: GitRepository
     name: tsb
   targetNamespace: bookinfo
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: tsb-dep
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: tsb
+  interval: 2m0s
+  path: ./kustomize/dep
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: tsb
